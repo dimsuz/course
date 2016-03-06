@@ -39,8 +39,7 @@ instance Functor (State s) where
     (a -> b)
     -> State s a
     -> State s b
-  (<$>) =
-      error "todo: Course.State#(<$>)"
+  (<$>) f st = State $ (\s -> let (a, ns) = runState st s in (f a, ns))
 
 -- | Implement the `Applicative` instance for `State s`.
 --
@@ -57,14 +56,14 @@ instance Applicative (State s) where
   pure ::
     a
     -> State s a
-  pure =
-    error "todo: Course.State pure#instance (State s)"
+  pure a = State $ \s -> (a,s)
   (<*>) ::
     State s (a -> b)
     -> State s a
-    -> State s b 
-  (<*>) =
-    error "todo: Course.State (<*>)#instance (State s)"
+    -> State s b
+  (<*>) (State sf) (State sa) = State (\s -> let (f,ns1) = sf s
+                                                 (a,ns2) = sa ns1
+                                                 in (f a,ns2))
 
 -- | Implement the `Bind` instance for `State s`.
 --
