@@ -61,8 +61,10 @@ the contents of c
 -- /Tip:/ use @getArgs@ and @run@
 main ::
   IO ()
-main =
-  error "todo: Course.FileIO#main"
+main = getArgs >>=
+  \args -> if isEmpty args
+           then putStrLn "Usage: FileIO.hs <filename>"
+           else run $ headOr Nil args
 
 type FilePath =
   Chars
@@ -98,4 +100,3 @@ printFile ::
   -> IO ()
 printFile =
   error "todo: Course.FileIO#printFile"
-
