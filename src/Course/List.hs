@@ -242,11 +242,11 @@ flattenAgain = flatMap id
 seqOptional ::
   List (Optional a)
   -> Optional (List a)
-seqOptional xs = case (filter isEmpty xs) of
+seqOptional xs = case (filter isEmptyOpt xs) of
   Nil -> Full $ map (\(Full x) -> x) xs
   _ -> Empty
-  where isEmpty (Full _) = False
-        isEmpty Empty = True
+  where isEmptyOpt (Full _) = False
+        isEmptyOpt Empty = True
 
 
 -- | Find the first element in the list matching the predicate.

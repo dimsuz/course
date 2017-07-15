@@ -63,8 +63,7 @@ infixr 1 =<<
   f (a -> b)
   -> f a
   -> f b
-(<**>) =
-  error "todo: Course.Monad#(<**>)"
+(<**>) mf ma = (\f -> f <$> ma) =<< mf
 
 infixl 4 <**>
 

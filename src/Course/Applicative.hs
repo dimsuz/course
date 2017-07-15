@@ -48,7 +48,7 @@ infixl 4 <*>
   (a -> b)
   -> f a
   -> f b
-(<$>) fn x = pure fn <*> x
+(<$$>) fn x = pure fn <*> x
 
 -- | Insert into ExactlyOne.
 --
